@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="sdkName" value="uv (semantic-scholar)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="uv (semantic-scholar)" project-jdk-type="Python SDK" />
+  <component name="TypeScriptCompiler">
+    <option name="showSuggestions" value="false" />
+    <option name="useService" value="false" />
+  </component>
+</project>
