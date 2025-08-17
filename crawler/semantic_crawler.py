@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from typing import Dict, Any, List
-from paper_info import PaperInfo
+from models.paper_info import PaperInfo
 
 
 def get_ui_version(session):
@@ -22,7 +22,7 @@ def get_ui_version(session):
     return tag.get("content")
 
 
-def search(query, page=1, page_size=10):
+def search_semantic_scholar(query, page=1, page_size=10):
     session = requests.Session()
     ui_version = get_ui_version(session)
 
@@ -70,15 +70,21 @@ def search(query, page=1, page_size=10):
     return resp.json()
 
 
-def parse_json(json: Dict[str, Any]) -> List[PaperInfo]:
-    return [PaperInfo(p) for p in json.get("results", [])]
+def json_to_paper(json: Dict[str, Any]) -> List[PaperInfo]:
+    """把搜索结果转换成 PaperInfo 列表"""
+    return [PaperInfo.from_raw(p) for p in json.get("results", [])]
+
+
+def search(query, page, page_size):
+    raw_json = search_semantic_scholar(query, page=page, page_size=page_size)
+    return json_to_paper(raw_json)
 
 
 if __name__ == "__main__":
     paper_name = input("请输入论文名称: ")
-    data = search(paper_name, page=1, page_size=5)
+    data = search_semantic_scholar(paper_name, page=1, page_size=5)
 
-    papers = parse_json(data)
+    papers = json_to_paper(data)
 
     for idx, paper in enumerate(papers, 1):
         print(f"====== Paper {idx} ======")
