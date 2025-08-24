@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from typing import Dict, Any, List
-from models.paper_info import PaperInfo
+from entity.paper_info import PaperInfo
 
 
 def get_ui_version(session):
@@ -83,7 +83,7 @@ def search(query, page, page_size):
 if __name__ == "__main__":
     paper_name = input("请输入论文名称: ")
     data = search_semantic_scholar(paper_name, page=1, page_size=5)
-
+    print(data)
     papers = json_to_paper(data)
 
     for idx, paper in enumerate(papers, 1):

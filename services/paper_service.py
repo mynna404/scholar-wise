@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from crawler import semantic_crawler
-from models.paper_info import PaperInfo
+from entity.paper_info import PaperInfo
 
 
 class PaperService:
